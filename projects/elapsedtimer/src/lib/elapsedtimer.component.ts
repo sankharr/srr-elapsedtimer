@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
+import { ElapsedtimerService } from './elapsedtimer.service';
 
 @Component({
   selector: 'srr-elapsedtimer',
@@ -24,7 +25,7 @@ export class ElapsedtimerComponent implements OnInit {
   private exceededSeconds: any;
   private exceededTimeSet = 0;
 
-  constructor() { }
+  constructor(private timer:ElapsedtimerService) { }
 
   ngOnInit(): void {
   }
