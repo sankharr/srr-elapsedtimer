@@ -1,170 +1,153 @@
 import { Injectable } from '@angular/core';
-// import { timer } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElapsedtimerService {
 
-  // private timeObservable: any;
-  // hours = 0;
-  // minutes = 0;
-  // seconds = 0;
-  // private delay = 0;
-  // private exceededColour = null;
+  resetTimerInvoke: Subject<any> = new Subject();
+  pauseTimerInvoke: Subject<any> = new Subject();
+  resumeTimerInvoke: Subject<any> = new Subject();
+  startTimerInvoke: Subject<any> = new Subject();
+  delayStartInvoke: Subject<any> = new Subject();
+  defaultSettingsInvoke: Subject<any> = new Subject();
+  timerExceedInvoke: Subject<any> = new Subject();
 
-  // private start = 1
-  // private exceededHour: any;
-  // private exceededMinutes: any;
-  // private exceededSeconds: any;
-  // private exceededTimeSet = 0;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  start = 1;
+  timeReset = 0;
+  alreadyStarted = 0;
+  // timerNormalColour = 'black';
+
+  exceededColour = null; 
+  exceededHour: any;
+  exceededMinutes: any;
+  exceededSeconds: any;
+  exceededTimeSet = 0;
+  // currentTime: String;
+  
+  timerColour = 'black'
+  timerFont: any;
+  timerFontSize: any;
 
   constructor() { }
 
-  // //this will start the timer as soon as it gets called
-  // startNow(){
-  //   this.timeObservable = timer(0, 1000)
-  //   this.timeObservable.subscribe(x => {
-  //     this.displayTimer()
-  //   });
-  // }
+  //this will return the current hour
+  getCurrentHour() {
+    return this.hours;
+  }
 
-  // //this will start the timer after certain number of seconds
-  // delayStart(seconds){
-  //   this.timeObservable = timer(0, 1000)
-  //   this.timeObservable.subscribe(x => {
-  //     setTimeout(()=> {this.displayTimer()},seconds*1000)
-  //   });
-  // }
+  //this will return the current minute
+  getCurrentMinute() {
+    return this.minutes;
+  }
 
-  // //this will get called inside the startNow(). this is where the actual timer function work
-  // private displayTimer() {
-  //   if(this.start == 1){
-  //     if (this.seconds < 59) {
-  //       this.seconds = this.seconds + 1;
-  //       if(this.exceededTimeSet == 1){
-  //         this.timerExceedColourChange();
-  //       }
-  //     }
-  //     else {
-  //       if (this.minutes < 59) {
-  //         this.minutes = this.minutes + 1;
-  //         this.seconds = 0;
-  //       }
-  //       else {       
-  //         this.hours = this.hours + 1;
-  //         this.minutes = 0;
-  //         this.seconds = 0;
-  //       }
-  //     }
-  //   }    
-  // }
-  
-  // //this will get the user input to set the timer to change the colour of text after a certian time
-  // setTimerExceedColourChange(exceedColour,hour,minutes,seconds){
-  //   this.exceededTimeSet = 1
-  //   this.exceededColour = exceedColour;
-  //   this.exceededHour = hour;
-  //   this.exceededMinutes = minutes;
-  //   this.exceededSeconds = seconds
-  // }
+  //this will return the current second
+  getCurrentSecond() {
+    return this.seconds;
+  }
 
-  // //this is the actual function which will change the colour of the text after a certain moment
-  // private timerExceedColourChange(){
-  //   this.exceededTimeSet = 0;   
-  //   if(this.hours >= this.exceededHour && this.minutes >= this.exceededMinutes && this.seconds >= this.exceededSeconds){
-  //     document.getElementById('timer').style.color = this.exceededColour
-  //   }
-  // }
+  //this will return the current time string
+  getCurrentTime() {
+    var currentTime: String;
+    if (this.seconds < 10) {
+      if (this.minutes < 10) {
+        if (this.hours < 10) {
+          currentTime = ("0" + this.hours + ":0" + this.minutes + ":0" + this.seconds).toString();
+        }
+        else {
+          currentTime = this.hours + ":0" + this.minutes + ":0" + this.seconds;
+        }
+      }
+      else {
+        if (this.hours < 10) {
+          currentTime = "0" + this.hours + ":" + this.minutes + ":0" + this.seconds;
+        }
+        else {
+          currentTime = this.hours + ":" + this.minutes + ":0" + this.seconds;
+        }
+      }
+    }
+    else {
+      if (this.minutes < 10) {
+        if (this.hours < 10) {
+          currentTime = "0" + this.hours + ":0" + this.minutes + ":" + this.seconds;
+        }
+        else {
+          currentTime = this.hours + ":0" + this.minutes + ":" + this.seconds;
+        }
+      }
+      else {
+        if (this.hours < 10) {
+          currentTime = "0" + this.hours + ":" + this.minutes + ":" + this.seconds;
+        }
+        else {
+          currentTime = this.hours + ":" + this.minutes + ":" + this.seconds;
+        }
+      }
+    }
+    return currentTime;
+  }
 
-  // //this will let the user to change the colour of the text
-  // changeColour(colour){
-  //   document.getElementById('timer').style.color = colour
-  // }
+  //this will invoke the resetTimer method in component.ts
+  resetTimer() {
+    console.log('resetTimer function got called from elapsed.Service.ts')
+    this.alreadyStarted = 1;
+    this.resetTimerInvoke.next("resetNow")
+  }
 
-  // //this will allow the user to change the font of the text
-  // changeFont(fontName){
-  //   document.getElementById('timer').style.fontFamily = fontName
-  // }
+  pauseTimer() {
+    console.log('pauseTimer function got called from elapsed.Service.ts')
+    this.pauseTimerInvoke.next("resetNow")
+  }
 
-  // //this will allow the user to change the size of the text
-  // changeFontSize(fontSize){
-  //   document.getElementById('timer').style.fontSize = fontSize+'px';
-  // }
+  resumeTimer() {
+    console.log('resumeTimer function got called from elapsed.Service.ts')
+    this.resumeTimerInvoke.next("resetNow")
+  }
 
-  // //this will rest the timer to 0
-  // resetTimer(){
-  //   this.start = 0;
-  //   this.hours = 0;
-  //   this.minutes = 0;
-  //   this.seconds = 0;
-  // }
+  startTimer() {
+    if (this.alreadyStarted == 0) {
+      this.alreadyStarted = 1;
+      console.log('startTimer function got called from elapsed.Service.ts')
+      this.startTimerInvoke.next("resetNow")
+    }
+    else {
+      console.log('call from elsePart startTimer')
+      this.resumeTimer();
+    }
+  }
 
-  // //this will pause the timer
-  // pauseTimer(){    
-  //   this.start = 0;
-  // }
+  delayStart(seconds) {
+    if (this.alreadyStarted == 0) {
+      this.alreadyStarted = 1;
+      console.log('delayTimer function got called from elapsed.Service.ts')
+      this.delayStartInvoke.next(seconds)
+    }
+    else {
+      console.log('call from elsePart delayStart')
+      setTimeout(()=>{this.resumeTimer()},seconds*1000)
+    }
+    // console.log('delayTimer function got called from elapsed.Service.ts')
+    // this.delayStartInvoke.next(seconds)
+  }
 
-  // //this will resume the timer
-  // resumeTimer(){    
-  //   this.start = 1;
-  // }
+  setTimerExceedColourChange(exceedColour, hour, minutes, seconds) {
+    this.exceededTimeSet = 1
+    this.exceededColour = exceedColour;
+    this.exceededHour = hour;
+    this.exceededMinutes = minutes;
+    this.exceededSeconds = seconds
+  }
 
-  // //this will return the current time
-  // getCurrentTime(){
-  //   var currentTime:String;
-  //   if(this.seconds < 10){
-  //     if(this.minutes < 10){
-  //       if(this.hours < 10){
-  //         currentTime = ("0"+this.hours+":0"+this.minutes+":0"+this.seconds).toString();
-  //       }
-  //       else{
-  //         currentTime =  this.hours+":0"+this.minutes+":0"+this.seconds;
-  //       }
-  //     }
-  //     else{
-  //       if(this.hours < 10){
-  //         currentTime =  "0"+this.hours+":"+this.minutes+":0"+this.seconds;
-  //       }
-  //       else{
-  //         currentTime =  this.hours+":"+this.minutes+":0"+this.seconds;
-  //       }
-  //     }
-  //   }
-  //   else{
-  //     if(this.minutes < 10){
-  //       if(this.hours < 10){
-  //         currentTime =  "0"+this.hours+":0"+this.minutes+":"+this.seconds;
-  //       }
-  //       else{
-  //         currentTime =  this.hours+":0"+this.minutes+":"+this.seconds;
-  //       }
-  //     }
-  //     else{
-  //       if(this.hours < 10){
-  //         currentTime =  "0"+this.hours+":"+this.minutes+":"+this.seconds;
-  //       }
-  //       else{
-  //         currentTime =  this.hours+":"+this.minutes+":"+this.seconds;
-  //       }
-  //     }
-  //   }
-  //   return currentTime;
-  // }
-
-  // //this will return the current hour
-  // getCurrentHour(){
-  //   return this.hours;
-  // }
-
-  // //this will return the current minute
-  // getCurrentMinute(){
-  //   return this.minutes;
-  // }
-
-  // //this will return the current second
-  // getCurrentSecond(){
-  //   return this.seconds;
-  // }
+  setTimerDefaultSettings(fontName,fontColour,fontSize){
+    this.timerFont = fontName;
+    this.timerColour = fontColour;
+    this.timerFontSize = fontSize;
+    this.defaultSettingsInvoke.next("settings")
+  }
 
 }
