@@ -35,11 +35,8 @@
 
 ## Demo
 
-[Working Demo]()
+[Working Demo](https://srr-elapsedtimerdemo.web.app/)
 
-### StackBlitz Demo
-
-- [Normal Usage](https://stackblitz.com/edit/angular-kruvnm)
 
 ## Installation
 
