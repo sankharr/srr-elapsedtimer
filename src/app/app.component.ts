@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   public myLibFontSize: number;
 
   constructor(
-    private timerService:ElapsedtimerService
+    private timer:ElapsedtimerService
   ) {
     this.myLibFontSize = 40;
     // this.timer.testFunc();
@@ -30,36 +30,36 @@ export class AppComponent implements OnInit {
   }
 
   buttonClick(){
-    this.timeNow = this.timerService.getCurrentTime();
-    console.log("Time now - ",this.timeNow," ",this.timerService.getCurrentHour()," ",this.timerService.getCurrentMinute()," ",this.timerService.getCurrentSecond())
-    // this.timerService.resetTimer();
+    this.timeNow = this.timer.getCurrentTime();
+    console.log("Time now - ",this.timeNow," ",this.timer.getCurrentHour()," ",this.timer.getCurrentMinute()," ",this.timer.getCurrentSecond())
+    // this.timer.resetTimer();
   }
 
   startNow(){
-    this.timerService.startTimer();
+    this.timer.startTimer();
   }
 
   pauseTimer(){
-    this.timerService.pauseTimer();
+    this.timer.pauseTimer();
   }
 
   resumeTimer(){
-    this.timerService.resumeTimer();
+    this.timer.resumeTimer();
   }
 
   delayStart(){
-    this.timerService.delayStart(2);
+    this.timer.delayStart(2);
   }
 
   setTimerExceedColourChange(){
-    this.timerService.setTimerExceedColourChange("red",0,0,2);
+    this.timer.setTimerExceedColourChange("red",0,0,2);
   }
 
   resetTimer(){
-    this.timerService.resetTimer();
+    this.timer.resetTimer();
   }
 
   setSettings(){
-    this.timerService.setTimerSettings('consolas','blue','70');
+    this.timer.setTimerSettings('consolas','blue','70');
   }
 }
