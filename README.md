@@ -31,7 +31,7 @@
 - Get the current time of the timer as full time string, hours, minutes or seconds 
 - Start, Pause, Resume, and Reset the timer
 - Start the timer with a delay
-- Set the timer to change it's value after a certain time
+- Set the timer to change it's colour after a certain time
 
 ## Demo
 
@@ -54,6 +54,7 @@ $ npm install srr-elapsedtimer --save
 ## Usage
 
 Import `ElapsedtimerModule` in in the root module(`AppModule`):
+Also Add `CUSTOM_ELEMENTS_SCHEMA` to `@angular/core` import statement and also to **schemas** array in `@NgModule`
 
 ```typescript
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -96,9 +97,9 @@ See [Demo](#demo)
 
 ## Methods
 
-- `ElapsedtimerService.startTimer()` Starts the timer
+- `ElapsedtimerService.startTimer()` Start the timer
 - `ElapsedtimerService.pauseTimer()` Pause the timer
-- `ElapsedtimerService.resumeTimer()` Resumes the timer
+- `ElapsedtimerService.resumeTimer()` Resume the timer
 - `ElapsedtimerService.delayStart(seconds:number)` Start the timer with a delay
 - `ElapsedtimerService.setTimerExceedColourChange(exceedColour: string, hour: number, minutes: number, seconds: number)` When the timer exceeds a certain time, the colour of the timer will get changed
 - `ElapsedtimerService.resetTimer()` Reset the timer
@@ -110,7 +111,7 @@ See [Demo](#demo)
 
 ## Versioning
 
-ngx-spinner will be maintained under the Semantic Versioning guidelines.
+srr-elapsedtimer will be maintained under the Semantic Versioning guidelines.
 Releases will be numbered with the following format:
 
 `<major>.<minor>.<patch>`
