@@ -12,7 +12,7 @@ export class ElapsedtimerService {
   startTimerInvoke: Subject<any> = new Subject();
   delayStartInvoke: Subject<any> = new Subject();
   defaultSettingsInvoke: Subject<any> = new Subject();
-  timerExceedInvoke: Subject<any> = new Subject();
+  // timerExceedInvoke: Subject<any> = new Subject();
 
   hours = 0;
   minutes = 0;
@@ -93,28 +93,31 @@ export class ElapsedtimerService {
   //this will invoke the resetTimer method in component.ts
   resetTimer() {
     this.alreadyStarted = 1;
-    this.resetTimerInvoke.next("resetNow")
+    this.resetTimerInvoke.next()
+  }
+
+  //this will invoke the pauseTimer method in component.ts
+  pauseTimer() {
+    this.pauseTimerInvoke.next()
   }
 
   //this will invoke the resetTimer method in component.ts
-  pauseTimer() {
-    this.pauseTimerInvoke.next("resetNow")
-  }
-
   resumeTimer() {
-    this.resumeTimerInvoke.next("resetNow")
+    this.resumeTimerInvoke.next()
   }
 
+  //this will invoke the startNowInvokeFunc method in component.ts
   startTimer() {
     if (this.alreadyStarted == 0) {
       this.alreadyStarted = 1;
-      this.startTimerInvoke.next("resetNow")
+      this.startTimerInvoke.next()
     }
     else {
       this.resumeTimer();
     }
   }
 
+  //this will invoke the delayStartInvokeFunc method in component.ts
   delayStart(seconds: number) {
     if (this.alreadyStarted == 0) {
       this.alreadyStarted = 1;
@@ -125,6 +128,7 @@ export class ElapsedtimerService {
     }    
   }
 
+  //this will set the colour and the time that is needed to get change when the timer hits a certain value
   setTimerExceedColourChange(exceedColour: string, hour: number, minutes: number, seconds: number) {
     this.exceededTimeSet = 1
     this.exceededColour = exceedColour;
@@ -133,11 +137,12 @@ export class ElapsedtimerService {
     this.exceededSeconds = seconds
   }
 
-  setTimerDefaultSettings(fontName: string,fontColour: string,fontSize: string){
+  //this will set the basic settings of the timer
+  setTimerSettings(fontName: string,fontColour: string,fontSize: string){
     this.timerFont = fontName;
     this.timerColour = fontColour;
     this.timerFontSize = fontSize;
-    this.defaultSettingsInvoke.next("settings")
+    this.defaultSettingsInvoke.next()
   }
 
 }
