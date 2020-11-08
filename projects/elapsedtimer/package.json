@@ -1,12 +1,32 @@
 {
-  "name": "elapsedtimer",
+  "name": "srr-elapsedtimer",
   "version": "1.0.0",
+  "description": "An angular library to create a elapsed timer for your angular project",
+  "keywords": [
+    "angular",
+    "elapsedtimer",
+    "srr",
+    "typescript",
+    "countdowntimer",
+    "timer"
+  ],
+  "bugs": {"url": "https://github.com/sankharr/srr-elapsedtimer/issues"},
+
+  "homepage": "https://www.linkedin.com/in/sankha-rathnayake/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sankharr/srr-elapsedtimer.git"
+  },
+  "author": {
+    "name": "Sankha Rathnayake",
+    "email": "srrdevelopers2017@gmail.com"
+  },
   "peerDependencies": {
     "@angular/common": "^10.2.0",
     "@angular/core": "^10.2.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  },
-  "author": "Sankha Rathnayake"
+  }  
 }
