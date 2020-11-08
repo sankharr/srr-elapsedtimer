@@ -13,22 +13,12 @@ import { ElapsedtimerService } from './elapsedtimer.service';
 })
 export class ElapsedtimerComponent implements OnInit, OnChanges {
 
-  @Input() startNow: boolean;
-  @Input() startDelay: number;
-  @Input() timerExceedSettings: String[];
-  @Input() timerColour: String;
-  @Input() timerFont: String;
-  @Input() timerFontSize: number;
 
   timeSubscription : Subscription;
-  public cmpFontSize: String;
-  // public cmpFont: string;
-  // public cmpFontColour: string;
+  public cmpFontSize: String; 
   
   private timeObservable: any;
-  // hours = 0;
-  // minutes = 0;
-  // seconds = 0;
+
   private delay = 0;
   private exceededColour = null;
 

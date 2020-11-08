@@ -20,14 +20,12 @@ export class ElapsedtimerService {
   start = 1;
   timeReset = 0;
   alreadyStarted = 0;
-  // timerNormalColour = 'black';
 
   exceededColour = null; 
   exceededHour: any;
   exceededMinutes: any;
   exceededSeconds: any;
   exceededTimeSet = 0;
-  // currentTime: String;
   
   timerColour = 'black'
   timerFont: any;
@@ -36,23 +34,23 @@ export class ElapsedtimerService {
   constructor() { }
 
   //this will return the current hour
-  getCurrentHour() {
+  getCurrentHour(): number {
     return this.hours;
   }
 
   //this will return the current minute
-  getCurrentMinute() {
+  getCurrentMinute(): number {
     return this.minutes;
   }
 
   //this will return the current second
-  getCurrentSecond() {
+  getCurrentSecond(): number {
     return this.seconds;
   }
 
   //this will return the current time string
-  getCurrentTime() {
-    var currentTime: String;
+  getCurrentTime(): string {
+    var currentTime: string;
     if (this.seconds < 10) {
       if (this.minutes < 10) {
         if (this.hours < 10) {
@@ -94,48 +92,40 @@ export class ElapsedtimerService {
 
   //this will invoke the resetTimer method in component.ts
   resetTimer() {
-    console.log('resetTimer function got called from elapsed.Service.ts')
     this.alreadyStarted = 1;
     this.resetTimerInvoke.next("resetNow")
   }
 
+  //this will invoke the resetTimer method in component.ts
   pauseTimer() {
-    console.log('pauseTimer function got called from elapsed.Service.ts')
     this.pauseTimerInvoke.next("resetNow")
   }
 
   resumeTimer() {
-    console.log('resumeTimer function got called from elapsed.Service.ts')
     this.resumeTimerInvoke.next("resetNow")
   }
 
   startTimer() {
     if (this.alreadyStarted == 0) {
       this.alreadyStarted = 1;
-      console.log('startTimer function got called from elapsed.Service.ts')
       this.startTimerInvoke.next("resetNow")
     }
     else {
-      console.log('call from elsePart startTimer')
       this.resumeTimer();
     }
   }
 
-  delayStart(seconds) {
+  delayStart(seconds: number) {
     if (this.alreadyStarted == 0) {
       this.alreadyStarted = 1;
-      console.log('delayTimer function got called from elapsed.Service.ts')
       this.delayStartInvoke.next(seconds)
     }
     else {
-      console.log('call from elsePart delayStart')
       setTimeout(()=>{this.resumeTimer()},seconds*1000)
-    }
-    // console.log('delayTimer function got called from elapsed.Service.ts')
-    // this.delayStartInvoke.next(seconds)
+    }    
   }
 
-  setTimerExceedColourChange(exceedColour, hour, minutes, seconds) {
+  setTimerExceedColourChange(exceedColour: string, hour: number, minutes: number, seconds: number) {
     this.exceededTimeSet = 1
     this.exceededColour = exceedColour;
     this.exceededHour = hour;
@@ -143,7 +133,7 @@ export class ElapsedtimerService {
     this.exceededSeconds = seconds
   }
 
-  setTimerDefaultSettings(fontName,fontColour,fontSize){
+  setTimerDefaultSettings(fontName: string,fontColour: string,fontSize: string){
     this.timerFont = fontName;
     this.timerColour = fontColour;
     this.timerFontSize = fontSize;

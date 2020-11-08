@@ -62,6 +62,4 @@ export class AppComponent implements OnInit {
   setSettings(){
     this.timerService.setTimerDefaultSettings('consolas','blue','70');
   }
-
-  // title = 'srr-elapsedtimer';
 }
